@@ -87,13 +87,11 @@ class _SearchBarScreenState extends State<SearchBarScreen> {
     },
   ];
 
-  // This list holds the data for the list view
   List<Map<String, dynamic>> _foundUsers = [];
   @override
   initState() {
-    // at the beginning, all users are shown
     _foundUsers = _allUsers;
-    // String dropdownValue = list[0];
+
     super.initState();
     //  WidgetsBinding.instance!.addPostFrameCallback((_) => showOverlay());
   }
@@ -340,34 +338,19 @@ class _SearchBarScreenState extends State<SearchBarScreen> {
       );
     });
     Navigator.of(context).overlay?.insert(overlayEntry);
-
-    // overlayState?.insert(overlayEntry);
-    // remove() {
-    //   overlayEntry.remove();
-    // }
-
-    // await Future.delayed(Duration(seconds: 2));
-    // overlayEntry.remove();
-    // close() {
-    //   OverlayEntry.remove();
-    // }
   }
 
-  // This function is called whenever the text field changes
   void _runFilter(String enteredKeyword) {
     List<Map<String, dynamic>> results = [];
     if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
       results = _allUsers;
     } else {
       results = _allUsers
           .where((user) =>
               user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
-      // we use the toLowerCase() method to make it case-insensitive
     }
 
-    // Refresh the UI
     setState(() {
       _foundUsers = results;
     });
